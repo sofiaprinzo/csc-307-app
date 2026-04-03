@@ -1,3 +1,3 @@
 Name: Sofia Prinzo
 
-Lab: Getting started with GIT and React
+IE0: Getting Started with React

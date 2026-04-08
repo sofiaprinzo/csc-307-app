@@ -16,12 +16,16 @@ function MyApp() {
     });
     setCharacters(updated);
   }
+
+  function updateList(person) {
+    setCharacters([...characters, person]);
+  }
   
   
-    return (
+  return (
     <div className="container">
       <Table characterData = {characters}  removeCharacter = {removeOneCharacter} />
-      <Form />
+      <Form handleSubmit = {updateList} />
     </div>
   );
 }

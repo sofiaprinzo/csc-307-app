@@ -66,6 +66,8 @@ const findUserByNameAndJob = (name, job) => {
   );
 };
 
+const generateID = () => Math.random().toString();
+
 
 
 
@@ -104,7 +106,11 @@ app.get("/users/:id", (req, res) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
+  const newUser = {
+    ...userToAdd,
+    id: generateID(),
+  };
+  addUser(newUser);
   res.status(201).send(newUser);
 })
 

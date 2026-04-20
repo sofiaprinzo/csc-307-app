@@ -10,11 +10,20 @@ function MyApp() {
 
   ])
 
-  function removeOneCharacter(index) {
-    const updated = characters.filter((character, i) => {
-        return i !== index;
-    });
-    setCharacters(updated);
+  function removeOneCharacter(id) {
+    deleteUser(id)
+      .then((response) => {
+        if (response.status === 204) {
+          const updated = characters.filter((character) => character.id !== id);
+          setCharacters(updated); 
+        } else if (response.status === 404) {
+          console.log("User not found.");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
   }
 
   function updateList(person) {
@@ -47,6 +56,12 @@ function MyApp() {
     });
 
     return promise;
+  }
+
+  function deleteUser(id) {
+    return fetch(`http://localhost:8000/users/${id}`, {
+      method: "DELETE",
+    });
   }
 
 

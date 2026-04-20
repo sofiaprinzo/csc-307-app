@@ -19,7 +19,13 @@ function MyApp() {
 
   function updateList(person) {
     postUser(person)
-      .then(() => setCharacters([...characters, person]))
+      .then((response) => {
+        if (response.status === 201) {
+          return response.json();
+        }
+        throw new Error("User not created");
+      })
+      .then((newUser) => setCharacters([...characters, newUser]))
       .catch((error) => {
         console.log(error);
       });
